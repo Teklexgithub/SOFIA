@@ -18,7 +18,17 @@
     @php( $password_reset_url = $password_reset_url ? url($password_reset_url) : '' )
 @endif
 
+
+
 @section('auth_header', __('adminlte::adminlte.login_message'))
+@if (session('error'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ session('error') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif
 
 @section('auth_body')
     <form action="{{ $login_url }}" method="post">
@@ -94,11 +104,11 @@
     @endif
 
     {{-- Register link --}}
-    @if($register_url)
+    <!-- @if($register_url)
         <p class="my-0">
             <a href="{{ $register_url }}">
                 {{ __('adminlte::adminlte.register_a_new_membership') }}
             </a>
         </p>
-    @endif
+    @endif -->
 @stop

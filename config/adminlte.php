@@ -134,7 +134,7 @@ return [
     */
 
     'usermenu_enabled' => true,
-    'usermenu_header' => false,
+    'usermenu_header' => true,
     'usermenu_header_class' => 'bg-primary',
     'usermenu_image' => false,
     'usermenu_desc' => false,
@@ -257,13 +257,13 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'dashboard',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
     'password_reset_url' => 'password/reset',
     'password_email_url' => 'password/email',
-    'profile_url' => false,
+    'profile_url' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -292,167 +292,247 @@ return [
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Menu-Configuration
     |
     */
+     
+        'menu' => [
+            // Navbar items:
+            [
+                'type' => 'navbar-search',
+                'text' => 'search',
+                'topnav_right' => true,
+            ],
+            [
+                'type' => 'fullscreen-widget',
+                'topnav_right' => true,
+            ],
 
-    'menu' => [
-        // Navbar items:
-        [
-            'type' => 'navbar-search',
-            'text' => 'search',
-            'topnav_right' => true,
-        ],
-        [
-            'type' => 'fullscreen-widget',
-            'topnav_right' => true,
-        ],
+            // Sidebar items:
+            [
+                'type' => 'sidebar-menu-search',
+                'text' => 'search',
+            ],
+            [
+                'text' => 'ዳሽቦርድ',
+                'route' => 'dashboard',
+                'icon' => 'fas fa-fw fa-home',
+            ],
+           
+            [
+                'text' => 'የተጠቃሚ አስተዳደር',
+                'icon' => 'fas fa-fw fa-users',
+                'submenu' =>[
 
-        // Sidebar items:
-        [
-            'type' => 'sidebar-menu-search',
-            'text' => 'search',
-        ],
-        [
-            'text' => 'Dashboard',
-            'url' => 'home',
-            'icon' => 'fas fa-fw fa-home',
-        ],
-        [
-            'text' => 'User Mgmt',
-            'icon' => 'fas fa-fw fa-users',
-            'submenu' =>[
+                    [
+                        'text' => 'ተጠቃሚ',
+                        'url' => '/users/user',
+                        'permission' => 'edit-user',
+                        'can' => 'view users',
+                    ],
+                    [
+                        'text' => 'ሚና',
+                        'url' => '/users/role',
+                        'can' => 'view role',
+                    ]
+                    // [
+                    //     'text' => 'ፍቃድ',
+                    //     'url' => '/users/permission',
+                    // ]
 
-                [
-                    'text' => 'Users',
-                    'url' => 'users',
-                ],
-                [
-                    'text' => 'Role',
-                    'url' => 'roles',
-                ],
-                [
-                    'text' => 'Permission',
-                    'url' => 'permissions',
-                ],
-
-            ]
-            
-        ],
-        [
-            'text' => 'Employee Mgmt',
-            'icon' => 'fas fa-fw fa-users',
-            'submenu' =>[
-
-                [
-                    'text' => 'Employee',
-                    'url' => 'employees',
-                ],
-                [
-                    'text' => 'Salary',
-                    'url' => 'salarys',
-                ],
-
-            ]
-            
-        ],
-        [
-            'text' => 'Address Mgmt',
-            'icon' => 'fas fa-fw fa-map-marker',
-            'submenu' =>[
-
-                [
-                    'text' => 'Region',
-                    'url' => 'regions',
-                ],
-                [
-                    'text' => 'Zone',
-                    'url' => 'zones',
-                ],
-                [
-                    'text' => 'Woreda',
-                    'url' => 'woredas',
-                ],
-                [
-                    'text' => 'Branch',
-                    'url' => 'branchs',
-                ],
-
-            ]
-            
-        ],
-        [
-            'text' => 'Material Mgmt',
-            'icon' => 'fas fa-fw fa-cubes',
-            'submenu' =>[
-
-                [
-                    'text' => 'Khat',
-                    'url' => 'Khats',
-                ],
-                [
-                    'text' => 'Soft-drink',
-                    'url' => 'Soft_drinks',
-                ],
-                [
-                    'text' => 'Cigarates',
-                    'url' => 'Cigarates',
-                ],
-                [
-                    'text' => 'Lozi',
-                    'url' => 'Lozis',
-                ],
-                [
-                    'text' => 'Store',
-                    'url' => 'stores',
-                ],
-
-            ]
-            
-        ],
-        [
-            'text' => 'Daily Work',
-            'icon' => 'fas fa-fw fa-briefcase',
-            'submenu' =>[
-
-                [
-                    'text' => 'View Daily-work',
-                    'url' => 'view_daily_works',
-                ],
-                [
-                    'text' => 'Submit Daily-work',
-                    'url' => 'submit_daily_works',
-                ],
-                [
-                    'text' => 'Credit',
-                    'url' => 'credits',
-                ],
-
-            ]
-            
-        ],
-        [
-            'text' => 'Report',
-            'icon' => 'fas fa-fw fa-chart-bar',
-            'submenu' =>[
-
-                [
-                    'text' => 'Report',
-                    'url' => 'reports',
-                ],
-                [
-                    'text' => 'Deleted File',
-                    'url' => 'deleted_files',
                 ],
                 
+                
+            ],
+            [
+                'text' => 'የሰራተኞች አስተዳደር',
+                'icon' => 'fas fa-fw fa-users',
+                'submenu' =>[
 
-            ]
+                    [
+                        'text' => 'ሰራተኛ',
+                        'url' => '/employees/employee',
+                        'can' => 'view employee',
+                    ],
+                    [
+                        'text' => 'የሰራተኛ ደሞዝ',
+                        'url' => '/employees/salary',
+                        'can' => 'view employee salary',
+                    ],
+                    [
+                        'text' => 'የሰራተኛ ብድር',
+                        'url' => '/employees/credit',
+                        'can' => 'view employee credit',
+                    ],
+
+                ],
+                
+            ],
             
+                
+            [
+                'text' => 'የአድራሻ አስተዳደር',
+                'icon' => 'fas fa-fw fa-map-marker',
+                'submenu' =>[
+
+                    [
+                        'text' => 'ክልል',
+                        'url' => '/address/region',
+                        'can' => 'view region',
+                    ],
+                    [
+                        'text' => 'ዞን',
+                        'url' => '/address/zone',
+                        'can' => 'view zone',
+                    ],
+                    [
+                        'text' => 'ወረዳ',
+                        'url' => '/address/woreda',
+                        'can' => 'view woreda',
+                    ],
+                    [
+                        'text' => 'ቅርንጫፍ',
+                        'url' => '/address/branch',
+                        'can' => 'view branch',
+                    ],
+
+                ],
+                
+            ],
+            [
+                'text' => 'የቁሳቁስ አስተዳደር',
+                'icon' => 'fas fa-fw fa-cubes',
+                'submenu' =>[
+
+                    [
+                        'text' => 'ጫት',
+                        'url' => '/material/khat',
+                        'can' => 'view khat',
+                    ],
+                    [
+                        'text' => 'ለስላሳ መጠጥ',
+                        'url' => '/material/soft_drink',
+                        'can' => 'view soft drink',
+                    ],
+                    [
+                        'text' => 'ሲጋራ',
+                        'url' => '/material/cigarate',
+                        'can' => 'view cigarate',
+                    ],
+                    [
+                        'text' => 'ሎዝ',
+                        'url' => '/material/lozi',
+                        'can' => 'view lozi',
+                    ],
+                    [
+                        'text' => 'መደብር',
+                        'url' => '/material/store',
+                        'can' => 'view store',
+                    ],
+
+                ],
+                
+            ],
+            [
+                'text' => 'የቀን ሕሳብ',
+                'icon' => 'fas fa-fw fa-briefcase',
+                'submenu' =>[
+                    
+                    
+                    [
+                        'text' => 'የመጣ ጫት',
+                        'url' => '/dailywork/yemetakhat',
+                        'can' => 'view yemeta khat',
+                    ],
+                    [
+                        'text' => 'የጫት ሕሳብ',
+                        'url' => '/dailywork/dailyworkkhat',
+                        'can' => 'view khat hisabi',
+                    ],
+                    [
+                        'text' => 'የለስላሳ መጠጦች ሕሳብ',
+                        'url' => '/dailywork/dailyworksoftdrink',
+                        'can' => 'view soft drink hisabi',
+                    ],
+                    [
+                        'text' => 'የሎዝ ሕሳብ',
+                        'url' => '/dailywork/dailyworklozi',
+                        'can' => 'view lozi hisabi',
+                    ],
+                    [
+                        'text' => 'የሲጋራ ሕሳብ',
+                        'url' => '/dailywork/dailyworkcigarates',
+                        'can' => 'view cigarate hisabi',
+                    ],
+                    [
+                        'text' => 'አካውንት',
+                        'url' => '/dailywork/dailyworkaccount',
+                        'can' => 'view account',
+                    ],
+                    [
+                        'text' => 'ዱቤ',
+                        'url' => '/dailywork/dailyworkcredit',
+                        'can' => 'view credit',
+                    ],
+                    [
+                        'text' => 'የተከፈለ',
+                        'url' => '/dailywork/dailyworkyetekefele',
+                        'can' => 'view yetekefele',
+                    ],
+                    [
+                        'text' => 'ወጭ',
+                        'url' => '/dailywork/dailyworkwoci',
+                        'can' => 'view woci',
+                    ],
+                    [
+                        'text' => 'ብር',
+                        'url' => '/dailywork/dailyworkbirr',
+                        'can' => 'view birr',
+                    ],
+
+                ],
+                
+            ],
+            [
+                'text' => 'ሪፖርት',
+                'icon' => 'fas fa-fw fa-chart-bar',
+                'submenu' =>[
+
+                    [
+                        'text' => 'የቅሪንጫፍ ሕሳብ',
+                        'url' => '/report/branchreport',
+                        'can' => 'view branch report',
+                    ],
+                    [
+                        'text' => 'የጎደለ ሕሳብ',
+                        'url' => '/dailywork/dailyworkgudilet',
+                        'can' => 'view gudilet',
+                    ],
+                    
+                    [
+                        'text' => 'የላክዎች ሕሳብ',
+                        'url' => '/report/exportereport',
+                        'can' => 'view exporter report',
+                    ],
+                    
+                    [
+                        'text' => 'የጠፋ  ፋይል',
+                        'url' => 'deleted_files',
+                        'can' => 'view deleted file',
+                    ],
+                    
+                    
+
+                ],
+                // 'can' => 'view branch report',
+                
+            ],
+            
+
+
+
+
         ],
-        
 
-
-
-
-    ],
-
+    
+    
     /*
     |--------------------------------------------------------------------------
     | Menu Filters
@@ -489,71 +569,71 @@ return [
 
     'plugins' => [
         'Datatables' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js',
                 ],
                 [
                     'type' => 'js',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js',
                 ],
                 [
                     'type' => 'css',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css',
                 ],
             ],
         ],
         'Select2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js',
                 ],
                 [
                     'type' => 'css',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css',
                 ],
             ],
         ],
         'Chartjs' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js',
                 ],
             ],
         ],
         'Sweetalert2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdn.jsdelivr.net/npm/sweetalert2@8',
                 ],
             ],
         ],
         'Pace' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'css',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-center-radar.min.css',
                 ],
                 [
                     'type' => 'js',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js',
                 ],
             ],
